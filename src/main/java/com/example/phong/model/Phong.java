@@ -11,9 +11,9 @@ public class Phong {
 
         RealMatrix normalMatrix = new Array2DRowRealMatrix(
                 new double[] { normalVector.getX(), normalVector.getY(), normalVector.getZ() });
+        normalMatrix = normalMatrix.transpose();
         RealMatrix centerMatrix = new Array2DRowRealMatrix(
                 new double[] { center.getX(), center.getY(), center.getZ() });
-        centerMatrix = centerMatrix.transpose();
         double D = normalMatrix.multiply(centerMatrix).getEntry(0, 0);
 
         Vector3D coords = Light.coords;
@@ -22,7 +22,6 @@ public class Phong {
         RealMatrix extensionMatrix = new Array2DRowRealMatrix(
                 new double[] { extensionOfLightVector.getX(), extensionOfLightVector.getY(),
                         extensionOfLightVector.getZ() });
-        extensionMatrix = extensionMatrix.transpose();
         double scaleNormal = normalMatrix.multiply(extensionMatrix).getEntry(0, 0) - D;
         Vector3D reflectionPoint = extensionOfLightVector.subtract(normalVector.scalarMultiply(scaleNormal * 2));
 
@@ -47,7 +46,7 @@ public class Phong {
          */
 
         Vector3D center = t.getCenterPoint();
-        double f = Light.getLightDecay(center);
+        double f = 1;// Light.getLightDecay(center);
         double Ip = Light.INTENSITY;
 
         double kd = Scene.getDiffuse();
