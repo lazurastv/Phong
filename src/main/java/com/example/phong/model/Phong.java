@@ -1,8 +1,33 @@
 package com.example.phong.model;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 
 public class Phong {
+    private static Vector3D getReflectionVector(Triangle t) {
+        Vector3D center = t.getCenterPoint();
+        Vector3D normalVector = t.getNormalVector();
+
+        Array2DRowRealMatrix normalMatrix = new Array2DRowRealMatrix(
+                new double[] { normalVector.getX(), normalVector.getY(), normalVector.getZ() });
+        Array2DRowRealMatrix centerMatrix = new Array2DRowRealMatrix(
+                new double[] { center.getX(), center.getY(), center.getZ() });
+        centerMatrix.transpose();
+        double D = normalMatrix.multiply(centerMatrix).getEntry(0, 0);
+
+        Vector3D coords = Light.coords;
+        Vector3D vectorToLight = coords.subtract(center).normalize();
+        Vector3D extensionOfLightVector = center.subtract(vectorToLight);
+        Array2DRowRealMatrix extensionMatrix = new Array2DRowRealMatrix(
+                new double[] { extensionOfLightVector.getX(), extensionOfLightVector.getY(),
+                        extensionOfLightVector.getZ() });
+        extensionMatrix.transpose();
+        double scaleNormal = normalMatrix.multiply(extensionMatrix).getEntry(0, 0) - D;
+        Vector3D reflectionPoint = extensionOfLightVector.subtract(normalVector.scalarMultiply(scaleNormal * 2));
+
+        return reflectionPoint.subtract(center);
+    }
+
     public static double getIntensity(Triangle t) {
         /*
          * f * Ip * [kd * (N o L) + ks * cos(alpha) ^ n]
@@ -20,17 +45,18 @@ public class Phong {
          * n = gładkość powierzchni
          */
 
-        double f = Light.getLightDecay(t.getCenterPoint());
+        Vector3D center = t.getCenterPoint();
+        double f = Light.getLightDecay(center);
         double Ip = Light.INTENSITY;
 
         double kd = Scene.getDiffuse();
         Vector3D N = t.getNormalVector();
-        Vector3D L = Light.getVectorFromPoint(t.getCenterPoint());
+        Vector3D L = Light.getVectorFromPoint(center);
 
         double ks = Scene.getSpecular();
-
-        Vector3D vectorToObserver = t.getCenterPoint().scalarMultiply(-1).normalize();
-        double alpha = 0;
+        Vector3D reflecedVector = getReflectionVector(t);
+        Vector3D vectorToObserver = center.scalarMultiply(-1).normalize();
+        double alpha = Vector3D.angle(vectorToObserver, reflecedVector);
         double n = Scene.n;
 
         return f * Ip * (kd * N.dotProduct(L) + ks * Math.pow(Math.cos(alpha), n));
