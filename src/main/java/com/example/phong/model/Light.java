@@ -9,23 +9,12 @@ public class Light {
     public static Vector3D coords = new Vector3D(0, 0, 0);
 
     public static void move(int direction, int axis) {
-        double x = coords.getX();
-        double y = coords.getY();
-        double z = coords.getZ();
-        switch (axis) {
-            case 0:
-                x += direction * DISTANCE_PER_MOVE;
-                break;
-            case 1:
-                y += direction * DISTANCE_PER_MOVE;
-                break;
-            case 2:
-                z += direction * DISTANCE_PER_MOVE;
-                break;
-            default:
-                System.out.println("Unsupported axis.");
-        }
-        coords = new Vector3D(x, y, z);
+        coords = coords.add(
+                new Vector3D(
+                        axis == 0 ? 1 : 0,
+                        axis == 1 ? 1 : 0,
+                        axis == 2 ? 1 : 0)
+                        .scalarMultiply(direction * DISTANCE_PER_MOVE));
     }
 
     public static Vector3D getVectorFromPoint(Vector3D point) {

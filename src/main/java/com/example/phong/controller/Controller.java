@@ -1,5 +1,6 @@
 package com.example.phong.controller;
 
+import com.example.phong.model.Light;
 import com.example.phong.model.Scene;
 import com.example.phong.model.SceneType;
 import com.example.phong.view.View;
@@ -18,7 +19,26 @@ public class Controller implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent event) {
         switch (event.getCode()) {
+            case W:
+                Light.move(1, 2);
+                break;
+            case S:
+                Light.move(-1, 2);
+                break;
+            case A:
+                Light.move(-1, 0);
+                break;
             case D:
+                Light.move(1, 0);
+                break;
+            case SPACE:
+                Light.move(-1, 1);
+                break;
+            case SHIFT:
+            case C:
+                Light.move(1, 1);
+                break;
+            case R:
                 Scene.loadScene(SceneType.DREWNO);
                 break;
             case K:

@@ -1,5 +1,7 @@
 package com.example.phong.model;
 
+import com.example.phong.view.View;
+
 import javafx.scene.canvas.GraphicsContext;
 
 public class Scene {
@@ -12,6 +14,11 @@ public class Scene {
             double intensity = Phong.getIntensity(t);
             t.draw(g, (int) (intensity * 255));
         }
+        g.strokeOval(
+                View.WIDTH / 2 + Light.coords.getX() - 5,
+                View.HEIGHT / 2 + Light.coords.getY() - 5,
+                10,
+                10);
     }
 
     public static double getSpecular() {
