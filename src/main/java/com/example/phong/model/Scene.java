@@ -5,12 +5,11 @@ import javafx.scene.canvas.GraphicsContext;
 public class Scene {
     private static double specular = 1;
     private static double diffuse = 1;
-    private static final double AMBIENT = 1;
-    public static final double SHININESS = 1;
 
     public static void draw(GraphicsContext g) {
         for (Triangle t : new Sphere().getTriangles(16)) {
-            t.draw(g);
+            double intensity = Phong.getIntensity(t);
+            t.draw(g, (int) (intensity * 255));
         }
     }
 

@@ -1,5 +1,7 @@
 package com.example.phong.model;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
 public class Sphere {
     /**
      * Returns array of triangles that are arranged in a sphere
@@ -10,8 +12,8 @@ public class Sphere {
     public Triangle[] getTriangles(int count) {
         return new Triangle[] {
                 new Triangle(
-                        new Point(-100, 0, 100),
-                        new Point(100, 0, 100),
-                        new Point(0, -200, 100)) };
+                        new Vector3D(-100, 0, 100),
+                        new Vector3D(100, 0, 100),
+                        new Vector3D(0, -200, 100)) };
     }
 }
