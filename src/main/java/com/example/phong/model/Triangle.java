@@ -26,13 +26,23 @@ public class Triangle {
         return new double[] { vertices[0].getZ(), vertices[1].getZ(), vertices[2].getZ() };
     }
 
+    public Vector3D getCenterPoint() {
+        double x = 0, y = 0, z = 0;
+        for (Vector3D vector : vertices) {
+            x += vector.getX();
+            y += vector.getY();
+            z += vector.getZ();
+        }
+        return new Vector3D(x / 3, y / 3, z / 3);
+    }
+
     public Vector3D getNormalVector() {
         double[] xs = getX();
         double[] ys = getY();
         double[] zs = getZ();
         Vector3D edge1 = new Vector3D(xs[0] - xs[1], ys[0] - ys[1], zs[0] - zs[1]);
         Vector3D edge2 = new Vector3D(xs[1] - xs[2], ys[1] - ys[2], zs[1] - zs[2]);
-        return edge1.crossProduct(edge2);
+        return edge1.crossProduct(edge2).normalize();
     }
 
     private double[] center(double[] values, boolean x) {

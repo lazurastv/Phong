@@ -1,5 +1,7 @@
 package com.example.phong.model;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
 public class Phong {
     public static double getIntensity(Triangle t) {
         /*
@@ -14,9 +16,23 @@ public class Phong {
          * 
          * ks = kierunkowe
          * alpha = kąt między wektorem do obserwatora a
-         * odbitym do światła
+         * odbitym do światła - obserwator w 0, 0, 0
          * n = gładkość powierzchni
          */
-        return 0;
+
+        double f = Light.getLightDecay(t.getCenterPoint());
+        double Ip = Light.INTENSITY;
+
+        double kd = Scene.getDiffuse();
+        Vector3D N = t.getNormalVector();
+        Vector3D L = Light.getVectorFromPoint(t.getCenterPoint());
+
+        double ks = Scene.getSpecular();
+
+        Vector3D vectorToObserver = t.getCenterPoint().scalarMultiply(-1).normalize();
+        double alpha = 0;
+        double n = Scene.n;
+
+        return f * Ip * (kd * N.dotProduct(L) + ks * Math.pow(Math.cos(alpha), n));
     }
 }
