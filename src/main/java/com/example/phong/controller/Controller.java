@@ -40,15 +40,19 @@ public class Controller implements EventHandler<KeyEvent> {
                 break;
             case R:
                 Scene.loadScene(SceneType.DREWNO);
+                System.out.println("Wybrano: Drewno");
                 break;
             case K:
                 Scene.loadScene(SceneType.KREDA);
+                System.out.println("Wybrano: Kreda");
                 break;
             case M:
                 Scene.loadScene(SceneType.METAL);
+                System.out.println("Wybrano: Metal");
                 break;
             case P:
                 Scene.loadScene(SceneType.PLASTIK);
+                System.out.println("Wybrano: Plastik");
                 break;
             default:
                 System.out.println("Key not used.");

@@ -1,8 +1,6 @@
 package com.example.phong.model;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
-import org.apache.commons.math3.linear.Array2DRowRealMatrix;
-import org.apache.commons.math3.linear.RealMatrix;
 
 public class Phong {
     public static double getIntensity(Triangle t) {
@@ -18,6 +16,6 @@ public class Phong {
         Vector3D R = N.scalarMultiply(2 * N.dotProduct(L)).subtract(L).normalize();
         Vector3D V = center.scalarMultiply(-1).normalize();
 
-        return f * Ip * (kd * N.dotProduct(L) + ks * Math.pow(V.dotProduct(R), Scene.n));
+        return f * Ip * (kd * Math.max(N.dotProduct(L), 0) + ks * Math.pow(Math.max(V.dotProduct(R), 0), Scene.n));
     }
 }

@@ -1,5 +1,7 @@
 package com.example.phong.model;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
 import com.example.phong.view.View;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -10,19 +12,15 @@ public class Scene {
     public static final double n = 5;
 
     public static void draw(GraphicsContext g) {
-        double min = 1;
         double max = -1;
-        for (Triangle t : new Sphere(0, 0, 100, 100).getTriangles(5)) {
+        for (Triangle t : new Sphere(0, 0, 100, 100).getTriangles(2)) {
             double intensity = Phong.getIntensity(t);
-            if (intensity < min) {
-                min = intensity;
-            }
             if (intensity > max) {
                 max = intensity;
             }
-            t.draw(g, (int) ((Math.min(-2, intensity) + 2) * 255 / 3));
+            t.draw(g, (int) (intensity * 255 / 2));
         }
-        System.out.println(min + " " + max);
+        System.out.println(max + " " + Light.coords);
         g.strokeOval(
                 View.WIDTH / 2 + Light.coords.getX() - 5,
                 View.HEIGHT / 2 + Light.coords.getY() - 5,
