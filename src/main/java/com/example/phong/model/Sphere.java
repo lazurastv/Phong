@@ -10,7 +10,7 @@ public class Sphere {
     private double centerX = 0;
     private double centerY = 0;
     private double centerZ = 0;
-    private double r = 100;
+    private double r = 250;
 
     public Sphere() {}
 
@@ -37,9 +37,9 @@ public class Sphere {
             double longitude = map(i, n, 0, Math.PI);
             for (int j = 0; j < n+1; j++) {
                 double latitude = map(j, n, 0, Math.PI);
-                double x = r * Math.sin(longitude) * Math.cos(latitude);
-                double y = r * Math.cos(longitude);
-                double z = r * Math.sin(longitude) * Math.sin(latitude);
+                double x = centerX + r * Math.sin(longitude) * Math.cos(latitude);
+                double y = centerY + r * Math.cos(longitude);
+                double z = centerZ + r * Math.sin(longitude) * Math.sin(latitude);
                 points[i][j] = new Vector3D(x, y, z);
             }
         }
@@ -53,8 +53,8 @@ public class Sphere {
         }
 
         for (int j = 0; j < n ; j++) {
-            trianglesList.add(new Triangle(new Vector3D(0, r, 0),points[1][j], points[1][j+1]));
-            trianglesList.add(new Triangle(new Vector3D(0, -r, 0),points[n-1][j], points[n-1][j+1]));
+            trianglesList.add(new Triangle(new Vector3D(centerX, centerY + r, centerZ),points[1][j], points[1][j+1]));
+            trianglesList.add(new Triangle(new Vector3D(centerX, centerY - r, centerZ),points[n-1][j], points[n-1][j+1]));
         }
 
         Triangle[] triangles = new Triangle[trianglesList.size()];
