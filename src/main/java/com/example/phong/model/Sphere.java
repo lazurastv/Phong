@@ -32,7 +32,7 @@ public class Sphere {
      * @return The triangles
      */
     public Triangle[] getTriangles(int n) {
-        Vector3D[][] points = new Vector3D[n][n+1];
+        Vector3D[][] points = new Vector3D[n][n + 1];
         for (int i = 1; i < n; i++) {
             double longitude = map(i, n, 0, Math.PI);
             for (int j = 0; j < n+1; j++) {
@@ -48,13 +48,13 @@ public class Sphere {
         for (int i = 1; i < n - 1; i++) {
             for (int j = 0; j < n ; j++) {
                 trianglesList.add(new Triangle(points[i][j], points[i + 1][j], points[i][j + 1]));
-                trianglesList.add(new Triangle(points[i + 1][j], points[i][j + 1], points[i + 1][j + 1]));
+                trianglesList.add(new Triangle(points[i + 1][j], points[i + 1][j + 1], points[i][j + 1]));
             }
         }
 
         for (int j = 0; j < n ; j++) {
             trianglesList.add(new Triangle(new Vector3D(centerX, centerY + r, centerZ),points[1][j], points[1][j+1]));
-            trianglesList.add(new Triangle(new Vector3D(centerX, centerY - r, centerZ),points[n-1][j], points[n-1][j+1]));
+            trianglesList.add(new Triangle(new Vector3D(centerX, centerY - r, centerZ),points[n - 1][j + 1], points[n - 1][j]));
         }
 
         Triangle[] triangles = new Triangle[trianglesList.size()];
@@ -65,5 +65,9 @@ public class Sphere {
     private double map(int index, int samples, double x1, double x2) {
         double sampleLength = (x2 - x1) / samples;
         return x1 + index * sampleLength;
+    }
+
+    public static void main(String[] args) {
+
     }
 }

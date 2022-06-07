@@ -12,7 +12,7 @@ public class Scene {
     public static void draw(GraphicsContext g) {
         double min = 1;
         double max = -1;
-        for (Triangle t : new Sphere(0, 0, 100, 100).getTriangles(5)) {
+        for (Triangle t : new Sphere(0, 0, 300, 100).getTriangles(30)) {
             double intensity = Phong.getIntensity(t);
             if (intensity < min) {
                 min = intensity;
@@ -20,7 +20,7 @@ public class Scene {
             if (intensity > max) {
                 max = intensity;
             }
-            t.draw(g, (int) ((Math.min(-2, intensity) + 2) * 255 / 3));
+            t.draw(g, (int) ((2 + Math.min(Math.max(-2, intensity), 2)) * 255 / 4));
         }
         System.out.println(min + " " + max);
         g.strokeOval(
