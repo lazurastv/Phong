@@ -7,7 +7,24 @@ import java.util.List;
 
 public class Sphere {
 
-    private double r = 200;
+    private double centerX = 0;
+    private double centerY = 0;
+    private double centerZ = 0;
+    private double r = 100;
+
+    public Sphere() {}
+
+    public Sphere(double r) {
+        this.r = r;
+    }
+
+    public Sphere(double centerX, double centerY, double centerZ, double r) {
+        this.centerX = centerX;
+        this.centerY = centerY;
+        this.centerZ = centerZ;
+        this.r = r;
+    }
+
     /**
      * Returns array of triangles that are arranged in a sphere
      * 
