@@ -2,26 +2,27 @@ package com.example.phong.model;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.RealMatrix;
 
 public class Phong {
     private static Vector3D getReflectionVector(Triangle t) {
         Vector3D center = t.getCenterPoint();
         Vector3D normalVector = t.getNormalVector();
 
-        Array2DRowRealMatrix normalMatrix = new Array2DRowRealMatrix(
+        RealMatrix normalMatrix = new Array2DRowRealMatrix(
                 new double[] { normalVector.getX(), normalVector.getY(), normalVector.getZ() });
-        Array2DRowRealMatrix centerMatrix = new Array2DRowRealMatrix(
+        RealMatrix centerMatrix = new Array2DRowRealMatrix(
                 new double[] { center.getX(), center.getY(), center.getZ() });
-        centerMatrix.transpose();
+        centerMatrix = centerMatrix.transpose();
         double D = normalMatrix.multiply(centerMatrix).getEntry(0, 0);
 
         Vector3D coords = Light.coords;
         Vector3D vectorToLight = coords.subtract(center).normalize();
         Vector3D extensionOfLightVector = center.subtract(vectorToLight);
-        Array2DRowRealMatrix extensionMatrix = new Array2DRowRealMatrix(
+        RealMatrix extensionMatrix = new Array2DRowRealMatrix(
                 new double[] { extensionOfLightVector.getX(), extensionOfLightVector.getY(),
                         extensionOfLightVector.getZ() });
-        extensionMatrix.transpose();
+        extensionMatrix = extensionMatrix.transpose();
         double scaleNormal = normalMatrix.multiply(extensionMatrix).getEntry(0, 0) - D;
         Vector3D reflectionPoint = extensionOfLightVector.subtract(normalVector.scalarMultiply(scaleNormal * 2));
 

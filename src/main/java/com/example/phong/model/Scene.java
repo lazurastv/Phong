@@ -10,6 +10,7 @@ public class Scene {
     public static final double n = 5;
 
     public static void draw(GraphicsContext g) {
+        Triangle[] triangles = new Sphere().getTriangles(16);
         for (Triangle t : new Sphere().getTriangles(16)) {
             double intensity = Phong.getIntensity(t);
             t.draw(g, (int) (intensity * 255));
