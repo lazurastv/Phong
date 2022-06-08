@@ -13,9 +13,9 @@ public class Phong {
         Vector3D L = Light.getVectorFromPoint(center);
 
         double ks = Scene.getSpecular();
-        Vector3D R = N.scalarMultiply(2 * N.dotProduct(L)).subtract(L).normalize();
+        Vector3D R = N.scalarMultiply(2 * L.dotProduct(N)).subtract(L).normalize();
         Vector3D V = center.scalarMultiply(-1).normalize();
 
-        return f * Ip * (kd * Math.max(N.dotProduct(L), 0) + ks * Math.pow(Math.max(V.dotProduct(R), 0), Scene.n));
+        return f * Ip * (kd * Math.max(L.dotProduct(N), 0) + ks * Math.pow(Math.max(R.dotProduct(V), 0), Scene.n));
     }
 }
