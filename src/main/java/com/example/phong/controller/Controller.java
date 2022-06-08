@@ -20,10 +20,10 @@ public class Controller implements EventHandler<KeyEvent> {
     public void handle(KeyEvent event) {
         switch (event.getCode()) {
             case W:
-                Light.move(1, 2);
+                Light.move(-1, 2);
                 break;
             case S:
-                Light.move(-1, 2);
+                Light.move(1, 2);
                 break;
             case A:
                 Light.move(-1, 0);
