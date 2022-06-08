@@ -1,7 +1,5 @@
 package com.example.phong.model;
 
-import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
-
 import com.example.phong.view.View;
 
 import javafx.scene.canvas.GraphicsContext;
