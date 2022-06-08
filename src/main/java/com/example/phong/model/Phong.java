@@ -5,7 +5,7 @@ import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 public class Phong {
     public static double getIntensity(Triangle t) {
         Vector3D center = t.getCenterPoint();
-        double f = 1; // Light.getLightDecay(center);
+        double f = Light.getLightDecay(center);
         double Ip = Light.INTENSITY;
 
         double kd = Scene.getDiffuse();

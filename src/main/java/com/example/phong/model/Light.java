@@ -4,7 +4,7 @@ import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 
 public class Light {
     public static final double C = 5;
-    public static final double INTENSITY = 5;
+    public static final double INTENSITY = 2000;
     public static final int DISTANCE_PER_MOVE = 10;
     public static Vector3D coords = new Vector3D(0, 0, 500);
 

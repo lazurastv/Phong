@@ -53,13 +53,13 @@ public class Triangle {
     }
 
     private Color getColor(double intensity) {
-        intensity /= 15;
+        intensity /= 20;
         int start = 50;
         int[] color = Scene.color;
         return Color.rgb(
-                (int) (color[0] * start / 255 + color[0] * intensity),
-                (int) (color[1] * start / 255 + color[1] * intensity),
-                (int) (color[2] * start / 255 + color[2] * intensity));
+                (int) (Math.min(255, color[0] * start / 255 + color[0] * intensity)),
+                (int) (Math.min(255, color[1] * start / 255 + color[1] * intensity)),
+                (int) (Math.min(255, color[2] * start / 255 + color[2] * intensity)));
     }
 
     public void draw(GraphicsContext g, double intensity) {

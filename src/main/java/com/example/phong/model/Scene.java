@@ -10,7 +10,7 @@ public class Scene {
     private static double diffuse = 1;
     public static final double n = 5;
     public static int[] color = new int[] { 125, 125, 125 };
-    private static int sphereRows = 120;
+    private static int sphereRows = 40;
 
     public static void draw(GraphicsContext g) {
         g.setFill(Color.BLACK);
