@@ -3,6 +3,7 @@ package com.example.phong.model;
 import com.example.phong.view.View;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Scene {
     private static double specular = 1;
@@ -11,19 +12,13 @@ public class Scene {
     private static int[] color = new int[]{125, 125, 125};
 
     public static void draw(GraphicsContext g) {
-        double min = 1;
-        double max = -1;
-        for (Triangle t : new Sphere(0, 0, 300, 100).getTriangles(30)) {
+        g.setFill(Color.BLACK);
+        g.fillRect(0, 0, View.WIDTH, View.HEIGHT);
+        for (Triangle t : new Sphere(0, 0, 500, 200).getTriangles(14)) {
             double intensity = Phong.getIntensity(t);
-            if (intensity < min) {
-                min = intensity;
-            }
-            if (intensity > max) {
-                max = intensity;
-            }
-            t.draw(g, calculateColor(intensity / 2));
+            t.draw(g, calculateColor(intensity / 10));
         }
-        System.out.println(min + " " + max);
+        g.setStroke(Color.YELLOW);
         g.strokeOval(
                 View.WIDTH / 2 + Light.coords.getX() - 5,
                 View.HEIGHT / 2 + Light.coords.getY() - 5,
@@ -48,7 +43,7 @@ public class Scene {
             case DREWNO:
                 specular = 0.8;
                 diffuse = 0.2;
-                color = new int[]{101, 67, 33};
+                color = new int[]{121, 87, 53};
                 break;
             case KREDA:
                 specular = 0;
