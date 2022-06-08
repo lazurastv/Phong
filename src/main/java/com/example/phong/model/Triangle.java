@@ -53,9 +53,11 @@ public class Triangle {
     }
 
     public void draw(GraphicsContext g, int[] intensity) {
-        g.beginPath();
+        //g.beginPath();
         g.setFill(Color.rgb(intensity[0], intensity[1], intensity[2]));
         g.fillPolygon(center(getX(), true), center(getY(), false), 3);
-        g.closePath();
+        g.setStroke(Color.rgb(intensity[0], intensity[1], intensity[2]));
+        g.strokePolygon(center(getX(), true), center(getY(), false), 3);
+        //g.closePath();
     }
 }

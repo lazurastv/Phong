@@ -54,6 +54,12 @@ public class Controller implements EventHandler<KeyEvent> {
                 Scene.loadScene(SceneType.PLASTIK);
                 System.out.println("Wybrano: Plastik");
                 break;
+            case Y:
+                Scene.addToSphereRowsNumber(1);
+                break;
+            case H:
+                Scene.addToSphereRowsNumber(-1);
+                break;
             default:
                 System.out.println("Key not used.");
         }
