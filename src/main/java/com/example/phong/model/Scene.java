@@ -8,6 +8,7 @@ public class Scene {
     private static double specular = 1;
     private static double diffuse = 1;
     public static final double n = 5;
+    private static int[] color = new int[]{125, 125, 125};
 
     public static void draw(GraphicsContext g) {
         double min = 1;
@@ -20,7 +21,7 @@ public class Scene {
             if (intensity > max) {
                 max = intensity;
             }
-            t.draw(g, (int) ((2 + Math.min(Math.max(-2, intensity), 2)) * 255 / 4));
+            t.draw(g, calculateColor(intensity / 2));
         }
         System.out.println(min + " " + max);
         g.strokeOval(
@@ -28,6 +29,10 @@ public class Scene {
                 View.HEIGHT / 2 + Light.coords.getY() - 5,
                 10,
                 10);
+    }
+
+    private static int[] calculateColor(double intensity) {
+        return new int[] {(int)(color[0] * intensity), (int)(color[1] * intensity), (int)(color[2] * intensity)};
     }
 
     public static double getSpecular() {
@@ -43,18 +48,22 @@ public class Scene {
             case DREWNO:
                 specular = 0.8;
                 diffuse = 0.2;
+                color = new int[]{101, 67, 33};
                 break;
             case KREDA:
                 specular = 0;
                 diffuse = 1;
+                color = new int[]{200, 200, 0};
                 break;
             case METAL:
                 specular = 1;
                 diffuse = 0;
+                color = new int[]{200, 200, 200};
                 break;
             case PLASTIK:
                 specular = 0.2;
                 diffuse = 0.8;
+                color = new int[]{255, 255, 255};
                 break;
             default:
                 System.out.println("Unused scene type.");

@@ -52,9 +52,9 @@ public class Triangle {
         return values;
     }
 
-    public void draw(GraphicsContext g, int intensity) {
+    public void draw(GraphicsContext g, int[] intensity) {
         g.beginPath();
-        g.setFill(Color.rgb(intensity, intensity, intensity));
+        g.setFill(Color.rgb(intensity[0], intensity[1], intensity[2]));
         g.fillPolygon(center(getX(), true), center(getY(), false), 3);
         g.closePath();
     }
