@@ -6,7 +6,7 @@ public class Light {
     public static final double C = 5;
     public static final double INTENSITY = 5;
     public static final int DISTANCE_PER_MOVE = 10;
-    public static Vector3D coords = new Vector3D(0, 0, 0);
+    public static Vector3D coords = new Vector3D(0, 0, 500);
 
     public static void move(int direction, int axis) {
         coords = coords.add(

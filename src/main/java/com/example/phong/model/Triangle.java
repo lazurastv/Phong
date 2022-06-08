@@ -52,12 +52,20 @@ public class Triangle {
         return values;
     }
 
-    public void draw(GraphicsContext g, int[] intensity) {
-        //g.beginPath();
-        g.setFill(Color.rgb(intensity[0], intensity[1], intensity[2]));
+    private Color getColor(double intensity) {
+        intensity /= 15;
+        int start = 50;
+        int[] color = Scene.color;
+        return Color.rgb(
+                (int) (color[0] * start / 255 + color[0] * intensity),
+                (int) (color[1] * start / 255 + color[1] * intensity),
+                (int) (color[2] * start / 255 + color[2] * intensity));
+    }
+
+    public void draw(GraphicsContext g, double intensity) {
+        g.setFill(getColor(intensity));
         g.fillPolygon(center(getX(), true), center(getY(), false), 3);
-        g.setStroke(Color.rgb(intensity[0], intensity[1], intensity[2]));
+        g.setStroke(getColor(intensity));
         g.strokePolygon(center(getX(), true), center(getY(), false), 3);
-        //g.closePath();
     }
 }
